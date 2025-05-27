@@ -56,8 +56,10 @@ app: "{{ template "harbor.name" . }}"
 
 {{/* Helper for printing values from existing secrets*/}}
 {{- define "harbor.secretKeyHelper" -}}
-  {{- if and (not (empty .data)) (hasKey .data .key) }}
-    {{- index .data .key | b64dec -}}
+  {{- if  (not (empty .data)) }}
+     {{- if  (hasKey .data .key)  }}
+        {{- index .data .key | b64dec -}}
+      {{- end -}}
   {{- end -}}
 {{- end -}}
 
